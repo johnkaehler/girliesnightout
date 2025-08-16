@@ -19,9 +19,7 @@ const defaultSquares = [
   "Take a group photo with the fashion police",
   "Try three different Italian wines",
   "Learn an Italian pickup line",
-  "Take a picture of Alex's tits and send to John",
   "Find live music and dance",
-  "Take a body shot off someone",
   "Take a midnight stroll in Brera",
   "Photobomb tourist photos",
   "Order in broken Italian",
@@ -34,12 +32,24 @@ const defaultSquares = [
   "Navigate the metro after midnight",
   "Find the best late-night pasta",
   "Start a dance party",
+  // Spicy additions below 🔥
+  "Take a body shot off someone",
   "Get a lap dance (or give one)",
   "Seductively feed someone a bite of your food",
   "Send a flirty text to an ex—then show the group",
   "Flash someone (discreetly or not)",
   "Take a risqué group photo in front of the Duomo",
-  "Lose an article of clothing (and don’t retrieve it for 30 mins)"
+  "Lose an article of clothing (and don’t retrieve it for 30 mins)",
+  "Kiss a stranger (anywhere)",
+  "Dance on a table or podium",
+  "Convince a stranger to buy you a round",
+  "Whisper something scandalous in a stranger’s ear",
+  "Get caught making out in a dark corner",
+  "Trade an item of clothing with a friend in the club bathroom",
+  "Let a stranger pick your next drink (no backsies)",
+  "Say 'I love you' to someone you just met",
+  "End the night with a secret you’ll never tell",
+  "Take a picture of Alex's tits and send to John"
 ];
 
 export default function Home() {
