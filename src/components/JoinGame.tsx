@@ -25,7 +25,7 @@ export default function JoinGame({ onJoin }: Props) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-pink-100 to-pink-300">
       <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
-        <h1 className="text-2xl font-bold text-center mb-6">Girlies' Night Out</h1>
+        <h1 className="text-2xl font-bold text-center mb-6">Girlies&apos; Night Out</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">

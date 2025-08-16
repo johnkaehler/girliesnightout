@@ -112,7 +112,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-pink-100 to-pink-300 py-8">
       <div className="max-w-7xl mx-auto px-4">
         <header className="text-center mb-8">
-          <h1 className="text-4xl mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-pink-500 to-rose-400 font-cursive" style={{ fontFamily: "'Comic Sans MS', cursive" }}>✨ Girlies' Night Out ✨</h1>
+          <h1 className="text-4xl mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-pink-500 to-rose-400 font-cursive" style={{ fontFamily: '"Comic Sans MS", cursive' }}>✨ Girlies&apos; Night Out ✨</h1>
           <p className="text-gray-600">Playing as {player.name}</p>
         </header>
 
@@ -135,7 +135,7 @@ export default function Home() {
                 key={square.id}
                 className="bg-white/80 backdrop-blur-sm p-3 rounded-lg shadow-sm border border-pink-200 text-gray-800"
               >
-                "{square.text}" - added by {square.createdBy}
+                &ldquo;{square.text}&rdquo; - added by {square.createdBy}
               </li>
             ))}
           </ul>
