@@ -112,7 +112,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-pink-100 to-pink-300 py-4 sm:py-8">
       <div className="max-w-7xl mx-auto px-2 sm:px-4">
         <header className="text-center mb-4 sm:mb-8">
-          <h1 className="text-3xl sm:text-4xl mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-pink-500 to-rose-400 font-cursive" style={{ fontFamily: '"Comic Sans MS", cursive' }}>✨ Girlies&apos; Night Out ✨</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-pink-500 to-rose-400 font-cursive whitespace-nowrap overflow-hidden text-ellipsis" style={{ fontFamily: '"Comic Sans MS", cursive' }}>✨ Girlies&apos; Night Out ✨</h1>
           <p className="text-gray-600">Playing as {player.name}</p>
         </header>
 

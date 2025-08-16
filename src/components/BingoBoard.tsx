@@ -32,7 +32,7 @@ export default function BingoBoard({ squares, onSquareClick, onRandomize }: Prop
         >
           {hasRandomized ? '✓ Board Randomized' : '🎲 Shuffle Board'}
         </button>
-        <div className="grid grid-cols-5 gap-1 sm:gap-2 w-full">
+        <div className="grid grid-cols-5 gap-1 sm:gap-2 w-full aspect-square">
           {squares.map((square) => (
             <BingoSquare
               key={square.id}
