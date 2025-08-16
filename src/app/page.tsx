@@ -1,103 +1,146 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import { BingoSquare, Player } from '../types/bingo';
+import BingoBoard from '../components/BingoBoard';
+import AddSquareForm from '../components/AddSquareForm';
+import JoinGame from '../components/JoinGame';
+
+const defaultSquares = [
+  "Order a Negroni at a fancy bar",
+  "Take a selfie at the Duomo",
+  "Eat gelato at midnight",
+  "Make friends with locals",
+  "Dance at a rooftop club",
+  "Try Milanese street food",
+  "Share a pizza with strangers",
+  "Find a hidden speakeasy",
+  "Sing karaoke in Italian",
+  "Take a group photo with the fashion police",
+  "Try three different Italian wines",
+  "Learn an Italian pickup line",
+  "Take a picture of Alex's tits and send to John",
+  "Find live music and dance",
+  "Take a body shot off someone",
+  "Take a midnight stroll in Brera",
+  "Photobomb tourist photos",
+  "Order in broken Italian",
+  "Find the best aperitivo spot",
+  "Make a toast in Italian",
+  "Exchange Instagram handles with locals",
+  "Find a celebrity lookalike",
+  "Try a traditional digestivo",
+  "Get restaurant recommendations from locals",
+  "Navigate the metro after midnight",
+  "Find the best late-night pasta",
+  "Start a dance party",
+  "Get a lap dance (or give one)",
+  "Seductively feed someone a bite of your food",
+  "Send a flirty text to an ex—then show the group",
+  "Flash someone (discreetly or not)",
+  "Take a risqué group photo in front of the Duomo",
+  "Lose an article of clothing (and don’t retrieve it for 30 mins)"
+];
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [player, setPlayer] = useState<Player | null>(null);
+  const [customSquares, setCustomSquares] = useState<BingoSquare[]>([]);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleJoinGame = (name: string) => {
+    const newPlayer: Player = {
+      id: Date.now().toString(),
+      name,
+      board: generateRandomBoard()
+    };
+    setPlayer(newPlayer);
+  };
+
+  const handleSquareClick = (squareId: string) => {
+    if (!player) return;
+
+    const updatedBoard = player.board.map(square =>
+      square.id === squareId
+        ? { ...square, isCompleted: !square.isCompleted }
+        : square
+    );
+
+    setPlayer({ ...player, board: updatedBoard });
+  };
+
+  const handleAddCustomSquare = (text: string) => {
+    if (!player) return;
+
+    const newSquare: BingoSquare = {
+      id: Date.now().toString(),
+      text,
+      isCompleted: false,
+      createdBy: player.name
+    };
+
+    setCustomSquares(prev => [...prev, newSquare]);
+  };
+
+  function generateRandomBoard(): BingoSquare[] {
+    const allSquares = [
+      ...defaultSquares,
+      ...customSquares.map(square => square.text)
+    ];
+    
+    return shuffle(allSquares)
+      .slice(0, 25)
+      .map((text, index) => ({
+        id: `${index}-${Date.now()}`,
+        text,
+        isCompleted: false
+      }));
+  }
+
+  function shuffle<T>(array: T[]): T[] {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  }
+
+  if (!player) {
+    return <JoinGame onJoin={handleJoinGame} />;
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-pink-100 to-pink-300 py-8">
+      <div className="max-w-7xl mx-auto px-4">
+        <header className="text-center mb-8">
+          <h1 className="text-4xl mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-pink-500 to-rose-400 font-cursive" style={{ fontFamily: "'Comic Sans MS', cursive" }}>✨ Girlies' Night Out ✨</h1>
+          <p className="text-gray-600">Playing as {player.name}</p>
+        </header>
+
+        <BingoBoard
+          squares={player.board}
+          onSquareClick={handleSquareClick}
+          onRandomize={() => {
+            const newBoard = generateRandomBoard();
+            setPlayer({ ...player, board: newBoard });
+          }}
+        />
+
+        <AddSquareForm onSubmit={handleAddCustomSquare} />
+
+        <div className="mt-8">
+          <h2 className="text-xl font-semibold mb-4">Custom Squares Added:</h2>
+          <ul className="space-y-2">
+            {customSquares.map(square => (
+              <li
+                key={square.id}
+                className="bg-white/80 backdrop-blur-sm p-3 rounded-lg shadow-sm border border-pink-200 text-gray-800"
+              >
+                "{square.text}" - added by {square.createdBy}
+              </li>
+            ))}
+          </ul>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
 }
