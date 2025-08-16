@@ -8,12 +8,9 @@ import JoinGame from '../components/JoinGame';
 
 const defaultSquares = [
   "Order a Negroni at a fancy bar",
-  "Take a selfie at the Duomo",
   "Eat gelato at midnight",
-  "Make friends with locals",
   "Dance at a rooftop club",
   "Try Milanese street food",
-  "Share a pizza with strangers",
   "Find a hidden speakeasy",
   "Sing karaoke in Italian",
   "Take a group photo with the fashion police",
@@ -23,14 +20,9 @@ const defaultSquares = [
   "Take a midnight stroll in Brera",
   "Photobomb tourist photos",
   "Order in broken Italian",
-  "Find the best aperitivo spot",
   "Make a toast in Italian",
   "Exchange Instagram handles with locals",
-  "Find a celebrity lookalike",
-  "Try a traditional digestivo",
-  "Get restaurant recommendations from locals",
   "Navigate the metro after midnight",
-  "Find the best late-night pasta",
   "Start a dance party",
   // Spicy additions below 🔥
   "Take a body shot off someone",
