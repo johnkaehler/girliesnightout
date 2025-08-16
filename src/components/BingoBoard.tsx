@@ -25,8 +25,7 @@ export default function BingoBoard({ squares, onSquareClick, onRandomize, hasWon
         <div className="absolute inset-0 flex items-center justify-center bg-rose-500/20 backdrop-blur-sm rounded-lg z-10">
           <div className="bg-white/90 px-6 py-4 rounded-xl shadow-lg text-center">
             <h2 className="text-2xl font-bold text-rose-500 mb-2">🎉 BINGO! 🎉</h2>
-            <p className="text-gray-600">You&apos;ve won!! Wow!!Congratulations!! You really did that. You&apos;re suuuuuch a good girl.</p>
-          </div>
+            <p className="text-gray-600">You&apos;ve won!! Wow!! Congratulations!! You really did that. You&apos;re suuuuuch a good girl. 😏</p>          </div>
         </div>
       )}
       <div className="flex flex-col items-center gap-2 sm:gap-4">
