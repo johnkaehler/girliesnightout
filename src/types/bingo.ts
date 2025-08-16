@@ -9,6 +9,7 @@ export interface Player {
   id: string;
   name: string;
   board: BingoSquare[];
+  hasWon?: boolean;
 }
 
 export interface GameState {

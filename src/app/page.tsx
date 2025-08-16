@@ -57,8 +57,41 @@ export default function Home() {
     setPlayer(newPlayer);
   };
 
+  const checkWin = (board: BingoSquare[]): boolean => {
+    const size = 5;
+    const grid = Array.from({ length: size }, (_, i) =>
+      board.slice(i * size, (i + 1) * size)
+    );
+
+    // Check rows
+    for (let row = 0; row < size; row++) {
+      if (grid[row].every(square => square.isCompleted)) {
+        return true;
+      }
+    }
+
+    // Check columns
+    for (let col = 0; col < size; col++) {
+      if (grid.every(row => row[col].isCompleted)) {
+        return true;
+      }
+    }
+
+    // Check diagonal (top-left to bottom-right)
+    if (grid.every((row, i) => row[i].isCompleted)) {
+      return true;
+    }
+
+    // Check diagonal (top-right to bottom-left)
+    if (grid.every((row, i) => row[4 - i].isCompleted)) {
+      return true;
+    }
+
+    return false;
+  };
+
   const handleSquareClick = (squareId: string) => {
-    if (!player) return;
+    if (!player || player.hasWon) return;
 
     const updatedBoard = player.board.map(square =>
       square.id === squareId
@@ -66,7 +99,8 @@ export default function Home() {
         : square
     );
 
-    setPlayer({ ...player, board: updatedBoard });
+    const hasWon = checkWin(updatedBoard);
+    setPlayer({ ...player, board: updatedBoard, hasWon });
   };
 
   const handleAddCustomSquare = (text: string) => {
@@ -123,8 +157,9 @@ export default function Home() {
           onSquareClick={handleSquareClick}
           onRandomize={() => {
             const newBoard = generateRandomBoard();
-            setPlayer({ ...player, board: newBoard });
+            setPlayer({ ...player, board: newBoard, hasWon: false });
           }}
+          hasWon={player.hasWon}
         />
 
         <AddSquareForm onSubmit={handleAddCustomSquare} />
